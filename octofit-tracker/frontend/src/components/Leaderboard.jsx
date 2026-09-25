@@ -1,8 +1,13 @@
 import { API_ENDPOINTS } from '../api'
 import { useResource } from '../hooks/useResource'
 
+const codespaceName = import.meta.env.VITE_CODESPACE_NAME?.trim()
+const leaderboardEndpoint = codespaceName
+  ? `https://${codespaceName}-8000.app.github.dev/api/leaderboard/`
+  : API_ENDPOINTS.leaderboard
+
 function Leaderboard() {
-  const { items, loading, error } = useResource(API_ENDPOINTS.leaderboard)
+  const { items, loading, error } = useResource(leaderboardEndpoint)
 
   return (
     <section className="page-section">

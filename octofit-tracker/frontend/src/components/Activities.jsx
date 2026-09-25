@@ -1,8 +1,13 @@
 import { API_ENDPOINTS } from '../api'
 import { useResource } from '../hooks/useResource'
 
+const codespaceName = import.meta.env.VITE_CODESPACE_NAME?.trim()
+const activitiesEndpoint = codespaceName
+  ? `https://${codespaceName}-8000.app.github.dev/api/activities/`
+  : API_ENDPOINTS.activities
+
 function Activities() {
-  const { items, loading, error } = useResource(API_ENDPOINTS.activities)
+  const { items, loading, error } = useResource(activitiesEndpoint)
 
   return (
     <section className="page-section">
